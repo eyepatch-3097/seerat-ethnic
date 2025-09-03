@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dotswitch | Performance Marketing for Ethnic Fashion Brands</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #d4af37;
+            --dark-bg: #1a1a1a;
+            --medium-bg: #2b2b2b;
+            --light-bg: #f8f9fa;
+            --text-light: #f0f0f0;
+            --text-dark: #343a40;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .icon-box p {
+            color: var(--text-muted);
+        }
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .hero {
+            /* Changed from gradient to a solid white background */
+            background-color: var(--light-bg);
+            padding: 140px 0;
+            text-align: center;
+            color: var(--text-dark); /* Changed text color for better contrast */
+        }
+        
+        /* New styling for the Dotswitch logo */
+        .dotswitch-logo {
+            width: 100px;
+            margin-bottom: 2rem;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark); /* Ensure h1 text is dark */
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 750px;
+            margin: 20px auto;
+            color: var(--text-dark); /* Ensure paragraph text is dark */
+            font-weight: 300;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 14px 35px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: #c8a02a;
+            border-color: #c8a02a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        
+        /* New styling for client logo in case study */
+        .client-logo {
+            height: 40px;
+            vertical-align: middle;
+            margin-left: 15px;
+            border-radius: 8px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .icon-box {
+            text-align: center;
+            padding: 35px;
+            border-radius: 15px;
+            background-color: var(--medium-bg);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid #333;
+        }
+        
+        .icon-box:hover {
+            transform: translateY(-8px);
+            background-color: #313131;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .icon-box i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .case-study-section {
+            background-color: #222;
+        }
+
+        .dashboard-container {
+            background-color: var(--medium-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid #444;
+        }
+        
+        .dashboard-tabs {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-tabs .nav-link {
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid transparent;
+            border-bottom: 1px solid #444;
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+        }
+        .dashboard-tabs .nav-link.active {
+            color: var(--primary-color);
+            background-color: #333;
+            border-color: #555 #555 #333;
+        }
+
+        .metric-card-sm {
+            background: #343434;
+            padding: 1.25rem;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .metric-card-sm .value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .metric-card-sm .label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        .metric-card-sm .change {
+            font-size: 0.9rem;
+        }
+        .text-success { color: #2ecc71 !important; }
+        .text-danger { color: #e74c3c !important; }
+
+        .chart-container {
+            height: 350px;
+        }
+
+        .unique-approach-section {
+            background-color: var(--dark-bg);
+        }
+        
+        /* Subtle Animations on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Adjustments for Canva embed */
+        .canva-embed-wrapper {
+             max-width: 100%;
+             height: auto;
+        }
+
+        footer {
+            background: #111;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container reveal">
+            <!-- Dotswitch Logo Added -->
+            <img src="https://cdn.prod.website-files.com/67dfa56ecc95967b2f2ee7a2/68a625bdfdc19ca3e53d2432_Untitled%20(256%20x%20256%20px)-p-500.png" alt="Dotswitch Logo" class="dotswitch-logo">
+            <h1>Performance Marketing for Indian Ethnic Fashion</h1>
+            <p>Dotswitch combines deep market expertise with AI-powered creative agility to drive scalable growth for visionary Indian fashion brands.</p>
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <a href="https://www.dotswitch.space" class="btn btn-primary" target="_blank">To Know More About Dotswitch</a>
+                <a href="#case-study" class="btn btn-primary">See Our Results</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fashion Challenges Section -->
+    <section id="what-we-do" class="py-5">
+        <div class="container my-5">
+            <div class="section-title reveal">
+                <h2>Solving the Unique Challenges of Ethnic Fashion Marketing</h2>
+                <p>Building a successful fashion brand requires more than just beautiful clothes. It demands a strategy that honors craftsmanship, tells a story, and connects with an audience that values culture and tradition.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 reveal" style="transition-delay: 0.1s;">
+                    <div class="icon-box">
+                        <i class="fas fa-palette"></i>
+                        <h4>Problem: The Art of Storytelling</h4>
+                        <p>We craft brand narratives that highlight the craftsmanship and cultural heritage behind each garment, building a deeper emotional connection with customers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 reveal" style="transition-delay: 0.2s;">
+                    <div class="icon-box">
+                        <i class="fas fa-magic-wand-sparkles"></i>
+                        <h4>Problem: Creative Fatigue</h4>
+                        <p>We use AI to rapidly generate and test hundreds of ad copy and visual variations, ensuring your campaigns stay fresh and effective throughout the entire fashion cycle.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 reveal" style="transition-delay: 0.3s;">
+                    <div class="icon-box">
+                        <i class="fas fa-crosshairs"></i>
+                        <h4>Problem: Finding the Right Niche</h4>
+                        <p>Our data-driven approach identifies and targets specific, culturally-aware audiences across platforms like Meta and Google, ensuring your budget is spent on high-intent buyers.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 reveal" style="transition-delay: 0.4s;">
+                    <div class="icon-box">
+                        <i class="fas fa-calendar-check"></i>
+                        <h4>Problem: Seasonal & Festive Demand</h4>
+                        <p>We create proactive campaign calendars tailored to key Indian festivals and wedding seasons, capturing peak customer intent and maximizing sales during critical periods.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section id="case-study" class="py-5 case-study-section">
+        <div class="container my-5">
+            <div class="section-title reveal">
+                <h2>Case Study: Elopeactive <img src="https://elopeactive.com/cdn/shop/files/Elope_Wordmark_dark.png?v=1734615632&width=135" alt="Elopeactive Logo" class="client-logo"></h2>
+                <p>Transforming a legacy brand into a digital powerhouse.</p>
+            </div>
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-5 reveal" style="transition-delay: 0.1s;">
+                    <h3>The Challenge</h3>
+                    <p class="text-muted">Elopeactive struggled to translate their brand equity into profitable online sales, facing low ROAS and ad creative that quickly became ineffective.</p>
+                    <h3 class="mt-4">Our Performance-Driven Solution</h3>
+                    <p class="text-muted">Dotswitch implemented a full-funnel strategy focusing on hyper-targeted audiences and AI-assisted content iteration to continuously optimize ads across Meta and Google.</p>
+                </div>
+                <div class="col-lg-7 reveal" style="transition-delay: 0.3s;">
+                    <div class="dashboard-container">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Performance Dashboard</h4>
+                            <span class="badge bg-secondary">Last 90 Days</span>
+                        </div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs dashboard-tabs" id="myTab" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="meta-tab" data-bs-toggle="tab" data-bs-target="#meta" type="button" role="tab" aria-controls="meta" aria-selected="true">Meta (IG & FB)</button>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="shopify-tab" data-bs-toggle="tab" data-bs-target="#shopify" type="button" role="tab" aria-controls="shopify" aria-selected="false">Google & Shopify</button>
+                          </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="meta" role="tabpanel" aria-labelledby="meta-tab">
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">ROAS</div><div class="value">11.2x</div><div class="change text-success">+250%</div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Spend</div><div class="value">$120k</div><div class="change text-muted"></div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Revenue</div><div class="value">$1.34M</div><div class="change text-success">+310%</div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Impressions</div><div class="value">15.2M</div><div class="change text-muted"></div></div></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="shopify" role="tabpanel" aria-labelledby="shopify-tab">
+                               <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">ROAS</div><div class="value">14.5x</div><div class="change text-success">+420%</div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Spend</div><div class="value">$80k</div><div class="change text-muted"></div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Revenue</div><div class="value">$1.16M</div><div class="change text-success">+550%</div></div></div>
+                                    <div class="col-6 col-md-3"><div class="metric-card-sm"><div class="label">Clicks</div><div class="value">250k</div><div class="change text-muted"></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Unique Approach -->
+    <section id="unique-approach" class="py-5 unique-approach-section">
+        <div class="container my-5">
+            <div class="section-title reveal">
+                <h2>Our Approach to Performance Marketing for Ethnic Fashion</h2>
+                <p>For brands in the ethnic fashion space, performance marketing isn't just about driving clicks—it's about creating a cohesive, high-impact strategy that resonates with high-value customers. At Dotswitch, we combine industry expertise with cutting-edge technology to turn potential buyers into loyal patrons.</p>
+            </div>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 reveal" style="transition-delay: 0.1s;">
+                    <!-- Canva embed code replaces placeholder image -->
+                    <div style="position: relative; width: 100%; height: 0; padding-top: 141.4286%;
+                        padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+                        border-radius: 8px; will-change: transform;" class="canva-embed-wrapper">
+                        <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                            src="https://www.canva.com/design/DAGwhWHRYIE/HSkqIj8GZQUjsvnGTMVSOA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+                        </iframe>
+                    </div>
+                    <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGwhWHRYIE&#x2F;HSkqIj8GZQUjsvnGTMVSOA&#x2F;view?utm_content=DAGwhWHRYIE&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">Dotswitch AI Product Lookbook</a> by Siddharth Das
+                </div>
+                <div class="col-lg-6 reveal" style="transition-delay: 0.3s;">
+                    <ul class="list-unstyled">
+                        <li class="d-flex mb-4">
+                            <i class="fas fa-hand-holding-heart fa-2x text-primary me-4 mt-1"></i>
+                            <div>
+                                <h5>Build Trust and Emotional Connection</h5>
+                                <p class="text-muted">We build full-funnel campaigns that use storytelling and value-driven content to nurture potential buyers, helping them feel connected to your brand before they make a purchase.</p>
+                            </div>
+                        </li>
+                         <li class="d-flex mb-4">
+                            <i class="fas fa-lightbulb fa-2x text-primary me-4 mt-1"></i>
+                            <div>
+                                <h5>Eliminate Creative Fatigue with AI</h5>
+                                <p class="text-muted">Our AI tools generate countless ad variations, allowing us to continuously test and optimize your ad copy and visuals. This ensures your campaigns are always fresh and engaging.</p>
+                            </div>
+                        </li>
+                         <li class="d-flex mb-4">
+                            <i class="fas fa-crosshairs fa-2x text-primary me-4 mt-1"></i>
+                            <div>
+                                <h5>Target Niche Audiences with Precision</h5>
+                                <p class="text-muted">We leverage advanced data and targeting to identify and reach high-intent, culturally aware customers across platforms. This maximizes the return on your ad spend and connects you with the right buyers.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex">
+                            <i class="fas fa-calendar-alt fa-2x text-primary me-4 mt-1"></i>
+                            <div>
+                                <h5>Capitalize on Seasonal and Festive Demand</h5>
+                                <p class="text-muted">We create proactive campaign calendars that align with key festivals, wedding seasons, and cultural events. This allows us to capture peak customer intent and drive major sales during the most critical times of the year.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <footer class="py-5">
+        <div class="container text-center reveal">
+            <h2 class="h1">Ready to Elevate Your Ethnic Fashion Brand?</h2>
+            <p class="lead my-4" style="color: rgba(255,255,255,0.7);">Let's schedule a call to discuss how the Dotswitch performance marketing engine can be tailored to your unique goals.</p>
+            <a href="mailto:siddharth@dotswitch.space" class="btn btn-primary btn-lg">Book a Discovery Call</a>
+            <div class="mt-5">
+                <p class="text-muted">&copy; 2025 Dotswitch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- SCROLL ANIMATIONS ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                observer.observe(el);
+            });
+
+            // --- CHART.JS DASHBOARD ---
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            
+            // Common Chart Styling
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: 'rgba(255, 255, 255, 0.8)' }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#333',
+                        titleColor: '#fff',
+                        bodyColor: '#ddd',
+                    },
+                },
+                interaction: {
+                    mode: 'nearest',
+                    axis: 'x',
+                    intersect: false
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'rgba(255, 255, 255, 0.6)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'rgba(255, 255, 255, 0.6)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    }
+                }
+            };
+            
+            // Mock Data
+            const labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11', 'Week 12'];
+            
+            const metaData = {
+                roas: [4.1, 4.5, 5.2, 6.1, 7.0, 7.5, 8.1, 9.0, 9.8, 10.5, 11.0, 11.2],
+                spend: [8, 8.5, 9, 9.5, 10, 10, 11, 11, 11.5, 11.5, 12, 12].map(v => v * 1000)
+            };
+            
+            const shopifyData = {
+                roas: [5.5, 6.2, 7.1, 8.0, 9.2, 10.1, 11.0, 12.1, 12.8, 13.5, 14.1, 14.5],
+                spend: [5, 5.5, 6, 6, 6.5, 7, 7, 7.5, 8, 8.5, 9, 9.5].map(v => v * 1000)
+            };
+            
+            // Chart Instance
+            const performanceChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Meta ROAS',
+                            data: metaData.roas,
+                            borderColor: '#42a5f5', // Blue for Meta
+                            backgroundColor: 'rgba(66, 165, 245, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Meta Spend',
+                            data: metaData.spend,
+                            borderColor: '#ef5350', // Red for Spend
+                            backgroundColor: 'rgba(239, 83, 80, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: { ...chartOptions, scales: {
+                    x: { ticks: { color: 'rgba(255, 255, 255, 0.6)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' }},
+                    y: { type: 'linear', position: 'left', title: { display: true, text: 'ROAS (x)', color: '#fff' }, ticks: { color: 'rgba(255, 255, 255, 0.6)' }, grid: { color: 'rgba(255, 255, 255, 0.1)' } },
+                    y1: { type: 'linear', position: 'right', title: { display: true, text: 'Spend ($)', color: '#fff' }, ticks: { color: 'rgba(255, 255, 255, 0.6)' }, grid: { drawOnChartArea: false }}
+                }}
+            });
+            
+            // Tab switch logic
+            const metaTab = document.getElementById('meta-tab');
+            const shopifyTab = document.getElementById('shopify-tab');
+
+            metaTab.addEventListener('shown.bs.tab', function (event) {
+                performanceChart.data.datasets[0].label = 'Meta ROAS';
+                performanceChart.data.datasets[0].data = metaData.roas;
+                performanceChart.data.datasets[0].borderColor = '#42a5f5';
+                performanceChart.data.datasets[0].backgroundColor = 'rgba(66, 165, 245, 0.2)';
+
+                performanceChart.data.datasets[1].label = 'Meta Spend';
+                performanceChart.data.datasets[1].data = metaData.spend;
+                performanceChart.data.datasets[1].borderColor = '#ef5350';
+                performanceChart.data.datasets[1].backgroundColor = 'rgba(239, 83, 80, 0.2)';
+                
+                performanceChart.update();
+            });
+
+            shopifyTab.addEventListener('shown.bs.tab', function (event) {
+                performanceChart.data.datasets[0].label = 'Google/Shopify ROAS';
+                performanceChart.data.datasets[0].data = shopifyData.roas;
+                performanceChart.data.datasets[0].borderColor = '#66bb6a'; // Green for Google/Shopify
+                performanceChart.data.datasets[0].backgroundColor = 'rgba(102, 187, 106, 0.2)';
+
+                performanceChart.data.datasets[1].label = 'Google/Shopify Spend';
+                performanceChart.data.datasets[1].data = shopifyData.spend;
+                performanceChart.data.datasets[1].borderColor = '#ffa726'; // Orange for Spend
+                performanceChart.data.datasets[1].backgroundColor = 'rgba(255, 167, 38, 0.2)';
+
+                performanceChart.update();
+            });
+        });
+    </script>
+</body>
+</html>
